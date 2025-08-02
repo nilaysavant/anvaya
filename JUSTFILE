@@ -8,6 +8,6 @@ build:
 test:
     cargo test --all-features
 
-# Document the repo incl examples and open it in web browser.
-doc-example:
-    cargo doc --examples --open
+# Document the repo incl all features, examples. But no external deps. Also open it in web browser.
+docs:
+    cargo doc --all-features --examples --no-deps --open
