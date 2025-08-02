@@ -19,7 +19,7 @@ fn main() {
         .insert(Abilities::Shoot);
     world
         .spawn()
-        .insert(Player("Hana"))
+        .insert(Player("Hannah"))
         .insert(Age(28))
         .insert(Abilities::Melee);
 
@@ -38,7 +38,7 @@ fn main() {
         .collect::<Vec<_>>();
     assert_eq!(players.len(), 2);
     assert_eq!(players[0], "Mike");
-    assert_eq!(players[1], "Hana");
+    assert_eq!(players[1], "Hannah");
     dbg!(&results);
 
     let Some(player1) = world.component_mut::<Player>(results[0].0) else {

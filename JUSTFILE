@@ -6,7 +6,7 @@ build:
 
 # Run tests.
 test:
-    cargo test
+    cargo test --all-features
 
 # Document the repo incl examples and open it in web browser.
 doc-example:

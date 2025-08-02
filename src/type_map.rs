@@ -6,7 +6,7 @@ use std::{
 /// Map types to its associated values.
 ///
 /// - Internal Data Structure for dynamic mapping of Types to its values,
-/// which makes this library possible.
+///   which makes this library possible.
 /// - __Note: The Value should be of the same type as its key(type).__
 /// - Inspired from __Type Driven API Design__ [Book](https://willcrichton.net/rust-api-type-patterns/registries.html#mapping-types-to-values).
 ///
@@ -205,12 +205,12 @@ mod tests {
 
         // Mutations...
         let player = type_map.get_mut::<Player>().unwrap();
-        player.0 = "Hana".to_string();
+        player.0 = "Hannah".to_string();
         let hp = type_map.get_mut::<HP>().unwrap();
         hp.0 = 50;
         let ability = type_map.get_mut::<Ability>().unwrap();
         *ability = Ability::Shoot;
-        assert_eq!(type_map.get::<Player>(), Some(&Player("Hana".to_string())));
+        assert_eq!(type_map.get::<Player>(), Some(&Player("Hannah".to_string())));
         assert_eq!(type_map.get::<HP>(), Some(&HP(50)));
         assert_eq!(type_map.get::<Ability>(), Some(&Ability::Shoot));
 
