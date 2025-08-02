@@ -19,7 +19,7 @@ pub mod prelude {
     pub use query_builder::{EntityFrequency, QueryBuilder, QueryBuilderMethods};
     /// Storage exports for external impls.
     pub use storage::{Identifier, Storage};
-    /// Export [`TypeMap`] for doc-tests. Not strictly needed.
+    /// Export [`TypeMap`] for re-use with external storage impls.
     pub use type_map::TypeMap;
     /// Exports world, traits etc for external storage impls.
     pub use world::{World, WorldMethods};
