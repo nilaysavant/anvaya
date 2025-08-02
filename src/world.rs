@@ -1,8 +1,8 @@
 use core::marker::PhantomData;
 
 use crate::{
-    entity_builder::{EntityBuilder, EntityBuilderMethods},
-    query_builder::{QueryBuilder, QueryBuilderMethods},
+    entity_builder::EntityBuilderMethods,
+    query_builder::QueryBuilderMethods,
     storage::{Identifier, Storage},
     type_map::TypeMap,
 };
