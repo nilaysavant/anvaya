@@ -60,8 +60,10 @@ impl WorldMethods for World<usize, Slab<TypeMap>> {
     type EntityStorage = Slab<TypeMap>;
 
     type ComponentStorage<T: 'static> = Slab<T>;
-    
-    type EntityBuilder<'a> = EntityBuilder<'a, Self::Key, Self::EntityStorage>;
+
+    type AssocEntityBuilder<'a> = EntityBuilder<'a, Self::Key, Self::EntityStorage>;
+
+    type AssocQueryBuilder<'a> = QueryBuilder<'a, Self::Key, Self::EntityStorage>;
 
     fn world(&self) -> &World<Self::Key, Self::EntityStorage> {
         self
@@ -101,6 +103,12 @@ impl QueryBuilderMethods for QueryBuilder<'_, usize, Slab<TypeMap>> {
     type EntityStorage = Slab<TypeMap>;
 
     type ComponentStorage<T: 'static> = Slab<T>;
+
+    fn create<I: crate::prelude::Identifier + 'static, E: Storage<Key = I, Value = TypeMap>>(
+        world: &World<I, E>,
+    ) -> QueryBuilder<'_, I, E> {
+        QueryBuilder::new(world)
+    }
 
     fn with_call_count(&mut self) -> &mut u32 {
         &mut self.with_call_count

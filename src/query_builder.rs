@@ -13,10 +13,24 @@ pub struct QueryBuilder<'a, I: Identifier, E: Storage<Key = I, Value = TypeMap>>
     pub(crate) world: &'a World<I, E>,
 }
 
+impl<'a, I: Identifier, E: Storage<Key = I, Value = TypeMap>> QueryBuilder<'a, I, E> {
+    pub fn new(world: &'a World<I, E>) -> Self {
+        Self {
+            world,
+            with_call_count: 0,
+            entity_freq: EntityFrequency::new(),
+        }
+    }
+}
+
 pub trait QueryBuilderMethods {
     type Key: Identifier + 'static;
     type EntityStorage: Storage<Key = Self::Key, Value = TypeMap>;
     type ComponentStorage<T: 'static>: Storage<Key = Self::Key, Value = T> + 'static;
+
+    fn create<I: Identifier + 'static, E: Storage<Key = I, Value = TypeMap>>(
+        world: &World<I, E>,
+    ) -> QueryBuilder<'_, I, E>;
 
     fn with_call_count(&mut self) -> &mut u32;
 

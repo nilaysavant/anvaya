@@ -2,7 +2,7 @@ use core::marker::PhantomData;
 
 use crate::{
     entity_builder::{EntityBuilder, EntityBuilderMethods},
-    query_builder::{EntityFrequency, QueryBuilder},
+    query_builder::{QueryBuilder, QueryBuilderMethods},
     storage::{Identifier, Storage},
     type_map::TypeMap,
 };
@@ -17,7 +17,8 @@ pub trait WorldMethods: Default {
     type Key: Identifier + 'static;
     type EntityStorage: Storage<Key = Self::Key, Value = TypeMap>;
     type ComponentStorage<T: 'static>: Storage<Key = Self::Key, Value = T> + 'static;
-    type EntityBuilder<'a>: EntityBuilderMethods;
+    type AssocEntityBuilder<'a>: EntityBuilderMethods;
+    type AssocQueryBuilder<'a>: QueryBuilderMethods;
 
     fn new() -> Self {
         Self::default()
@@ -29,15 +30,11 @@ pub trait WorldMethods: Default {
 
     fn spawn(&mut self) -> EntityBuilder<'_, Self::Key, Self::EntityStorage> {
         let id = self.world_mut().entities.0.insert(TypeMap::new());
-        Self::EntityBuilder::create(id, self.world_mut())
+        Self::AssocEntityBuilder::create(id, self.world_mut())
     }
 
     fn query(&self) -> QueryBuilder<'_, Self::Key, Self::EntityStorage> {
-        QueryBuilder {
-            world: self.world(),
-            with_call_count: 0,
-            entity_freq: EntityFrequency::new(),
-        }
+        Self::AssocQueryBuilder::create(self.world())
     }
 
     fn component_mut<C: 'static>(&mut self, entity: Self::Key) -> Option<&mut C> {
