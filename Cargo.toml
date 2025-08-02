@@ -5,5 +5,14 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Nilay Savant"]
 
+[features]
+default = []
+# Enable Slab storage integration.
+slab = ["dep:slab"]
+
 [dependencies]
-slab = "0.4.10"
+slab = { version = "0.4.10", optional = true }
+
+[[example]]
+name = "basic_slab"
+required-features = ["slab"]
