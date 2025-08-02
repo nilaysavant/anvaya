@@ -60,6 +60,8 @@ impl WorldMethods for World<usize, Slab<TypeMap>> {
     type EntityStorage = Slab<TypeMap>;
 
     type ComponentStorage<T: 'static> = Slab<T>;
+    
+    type EntityBuilder<'a> = EntityBuilder<'a, Self::Key, Self::EntityStorage>;
 
     fn world(&self) -> &World<Self::Key, Self::EntityStorage> {
         self
@@ -76,6 +78,13 @@ impl EntityBuilderMethods for EntityBuilder<'_, usize, Slab<TypeMap>> {
     type EntityStorage = Slab<TypeMap>;
 
     type ComponentStorage<T: 'static> = Slab<T>;
+
+    fn create<I: crate::prelude::Identifier + 'static, E: Storage<Key = I, Value = TypeMap>>(
+        id: I,
+        world: &mut World<I, E>,
+    ) -> EntityBuilder<'_, I, E> {
+        EntityBuilder { id, world }
+    }
 
     fn id(&self) -> Self::Key {
         self.id

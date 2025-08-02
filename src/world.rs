@@ -1,7 +1,7 @@
 use core::marker::PhantomData;
 
 use crate::{
-    entity_builder::EntityBuilder,
+    entity_builder::{EntityBuilder, EntityBuilderMethods},
     query_builder::{EntityFrequency, QueryBuilder},
     storage::{Identifier, Storage},
     type_map::TypeMap,
@@ -17,6 +17,7 @@ pub trait WorldMethods: Default {
     type Key: Identifier + 'static;
     type EntityStorage: Storage<Key = Self::Key, Value = TypeMap>;
     type ComponentStorage<T: 'static>: Storage<Key = Self::Key, Value = T> + 'static;
+    type EntityBuilder<'a>: EntityBuilderMethods;
 
     fn new() -> Self {
         Self::default()
@@ -28,10 +29,7 @@ pub trait WorldMethods: Default {
 
     fn spawn(&mut self) -> EntityBuilder<'_, Self::Key, Self::EntityStorage> {
         let id = self.world_mut().entities.0.insert(TypeMap::new());
-        EntityBuilder {
-            id,
-            world: self.world_mut(),
-        }
+        Self::EntityBuilder::create(id, self.world_mut())
     }
 
     fn query(&self) -> QueryBuilder<'_, Self::Key, Self::EntityStorage> {

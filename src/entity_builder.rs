@@ -17,6 +17,11 @@ pub trait EntityBuilderMethods {
     type EntityStorage: Storage<Key = Self::Key, Value = TypeMap>;
     type ComponentStorage<T: 'static>: Storage<Key = Self::Key, Value = T> + 'static;
 
+    fn create<I: Identifier + 'static, E: Storage<Key = I, Value = TypeMap>>(
+        id: I,
+        world: &mut World<I, E>,
+    ) -> EntityBuilder<'_, I, E>;
+
     fn id(&self) -> Self::Key;
 
     fn world(&mut self) -> &mut World<Self::Key, Self::EntityStorage>;
