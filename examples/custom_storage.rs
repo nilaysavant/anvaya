@@ -25,13 +25,16 @@ fn main() {
         .insert(Abilities::Melee);
     // Query and filter...
     let mut query = world.query();
-    let mut results = query
+    let results = query
         .with::<Abilities>() //
         .get::<Player>()
-        .unwrap();
+        .unwrap()
+        .map(|(_, p)| p.0)
+        .collect::<Vec<_>>();
     // Validate...
-    assert_eq!(results.next().unwrap().1.0, "Mike");
-    assert_eq!(results.next().unwrap().1.0, "Hannah");
+    assert_eq!(results[0], "Mike");
+    assert_eq!(results[1], "Hannah");
+    dbg!(results);
 }
 
 #[derive(Debug)]
