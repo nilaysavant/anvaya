@@ -5,14 +5,24 @@ version = "0.1.0"
 edition = "2024"
 authors = ["Nilay Savant"]
 
+[workspace.dependencies]
+slab = { version = "0.4.10", default-features = false }
+
 [features]
-default = []
+default = ["slab"]
 # Enable Slab storage integration.
 slab = ["dep:slab"]
 
 [dependencies]
-slab = { version = "0.4.10", optional = true }
+slab = { workspace = true, optional = true }
+
+[dev-dependencies]
+slab = { workspace = true }
 
 [[example]]
 name = "basic_slab"
 required-features = ["slab"]
+
+[[example]]
+name = "custom_storage"
+required-features = []

@@ -3,24 +3,27 @@ use core::marker::PhantomData;
 use crate::{
     storage::{Identifier, Storage},
     type_map::TypeMap,
-    world::{ComponentId, Table, World},
+    world::{ComponentId, Table, World, WorldMethods},
 };
 
 #[derive(Debug)]
 pub struct EntityBuilder<'a, I: Identifier, E: Storage<Key = I, Value = TypeMap>> {
-    pub(crate) id: I,
-    pub(crate) world: &'a mut World<I, E>,
+    pub id: I,
+    pub world: &'a mut World<I, E>,
 }
 
-pub trait EntityBuilderMethods {
+impl<'a, I: Identifier, E: Storage<Key = I, Value = TypeMap>> EntityBuilder<'a, I, E> {
+    pub fn new(id: I, world: &'a mut World<I, E>) -> Self {
+        Self { id, world }
+    }
+}
+
+pub trait EntityBuilderMethods<'a> {
     type Key: Identifier + 'static;
     type EntityStorage: Storage<Key = Self::Key, Value = TypeMap>;
     type ComponentStorage<T: 'static>: Storage<Key = Self::Key, Value = T> + 'static;
 
-    fn create<I: Identifier + 'static, E: Storage<Key = I, Value = TypeMap>>(
-        id: I,
-        world: &mut World<I, E>,
-    ) -> EntityBuilder<'_, I, E>;
+    fn create(id: Self::Key, world: &'a mut World<Self::Key, Self::EntityStorage>) -> Self;
 
     fn id(&self) -> Self::Key;
 

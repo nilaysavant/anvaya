@@ -74,18 +74,15 @@ impl WorldMethods for World<usize, Slab<TypeMap>> {
     }
 }
 
-impl EntityBuilderMethods for EntityBuilder<'_, usize, Slab<TypeMap>> {
+impl<'a> EntityBuilderMethods<'a> for EntityBuilder<'a, usize, Slab<TypeMap>> {
     type Key = usize;
 
     type EntityStorage = Slab<TypeMap>;
 
     type ComponentStorage<T: 'static> = Slab<T>;
 
-    fn create<I: crate::prelude::Identifier + 'static, E: Storage<Key = I, Value = TypeMap>>(
-        id: I,
-        world: &mut World<I, E>,
-    ) -> EntityBuilder<'_, I, E> {
-        EntityBuilder { id, world }
+    fn create(id: Self::Key, world: &'a mut World<Self::Key, Self::EntityStorage>) -> Self {
+        Self::new(id, world)
     }
 
     fn id(&self) -> Self::Key {
@@ -97,17 +94,15 @@ impl EntityBuilderMethods for EntityBuilder<'_, usize, Slab<TypeMap>> {
     }
 }
 
-impl QueryBuilderMethods for QueryBuilder<'_, usize, Slab<TypeMap>> {
+impl<'a> QueryBuilderMethods<'a> for QueryBuilder<'a, usize, Slab<TypeMap>> {
     type Key = usize;
 
     type EntityStorage = Slab<TypeMap>;
 
     type ComponentStorage<T: 'static> = Slab<T>;
 
-    fn create<I: crate::prelude::Identifier + 'static, E: Storage<Key = I, Value = TypeMap>>(
-        world: &World<I, E>,
-    ) -> QueryBuilder<'_, I, E> {
-        QueryBuilder::new(world)
+    fn create(world: &'a World<Self::Key, Self::EntityStorage>) -> Self {
+        Self::new(world)
     }
 
     fn with_call_count(&mut self) -> &mut u32 {
