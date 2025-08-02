@@ -1,0 +1,8 @@
+[package]
+name = "anvaya"
+description = "ECS like dynamic storage in ~500 LOC."
+version = "0.1.0"
+edition = "2024"
+authors = ["Nilay Savant"]
+
+[dependencies]
