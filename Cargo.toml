@@ -6,3 +6,4 @@ edition = "2024"
 authors = ["Nilay Savant"]
 
 [dependencies]
+slab = "0.4.10"

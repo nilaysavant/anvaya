@@ -5,9 +5,10 @@ use std::{
 
 /// Map types to its associated values.
 ///
-/// Note: The Value should be of the same type as its key(type).
-///
-/// Inspired from __Type Driven API Design__ [Book](https://willcrichton.net/rust-api-type-patterns/registries.html#mapping-types-to-values).
+/// - Internal Data Structure for dynamic mapping of Types to its values,
+/// which makes this library possible.
+/// - __Note: The Value should be of the same type as its key(type).__
+/// - Inspired from __Type Driven API Design__ [Book](https://willcrichton.net/rust-api-type-patterns/registries.html#mapping-types-to-values).
 ///
 /// # Examples
 ///
