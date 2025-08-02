@@ -6,6 +6,7 @@ fn main() {
     #[derive(Debug)]
     struct Player(&'static str);
     #[derive(Debug)]
+    #[allow(dead_code)]
     struct Age(u8);
     #[derive(Debug)]
     enum Abilities {

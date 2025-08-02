@@ -3,7 +3,7 @@ use core::marker::PhantomData;
 use crate::{
     storage::{Identifier, Storage},
     type_map::TypeMap,
-    world::{ComponentId, Table, World, WorldMethods},
+    world::{ComponentId, Table, World},
 };
 
 #[derive(Debug)]

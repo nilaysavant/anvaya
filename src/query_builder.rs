@@ -75,7 +75,7 @@ pub trait QueryBuilderMethods<'a> {
         self
     }
 
-    fn get<C: 'static>(&'a mut self) -> Option<impl Iterator<Item = (Self::Key, &C)>> {
+    fn get<C: 'static>(&'a mut self) -> Option<impl Iterator<Item = (Self::Key, &'a C)>> {
         let with_call_count = *self.with_call_count();
         let world = self.world();
         let table = world
