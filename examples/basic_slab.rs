@@ -1,3 +1,5 @@
+//! Basic Example with Slab Storage Integration.
+
 use anvaya::prelude::*;
 
 fn main() {
