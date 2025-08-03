@@ -9,6 +9,7 @@ license = "MIT OR Apache-2.0"
 readme = "README.md"
 keywords = ["ecs", "entity"]
 categories = ["data-structures", "game-engines"]
+exclude = [".github/"]
 
 [package.metadata.docs.rs]
 all-features = true

@@ -1,10 +1,10 @@
 default: build
 
-# Default library build.
+# Default library build. PS: This also runs on Github Actions CI.
 build:
     cargo build
 
-# Run tests.
+# Run tests. PS: This also runs on Github Actions CI.
 test:
     cargo test --all-features
 
