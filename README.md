@@ -1,5 +1,10 @@
 # Anvaya
 
+[![publish](https://github.com/nilaysavant/anvaya/actions/workflows/publish.yml/badge.svg)](https://github.com/nilaysavant/anvaya/actions/workflows/publish.yml)
+[![Crates.io Version](https://img.shields.io/crates/v/anvaya)](https://crates.io/crates/anvaya)
+[![docs.rs](https://img.shields.io/docsrs/anvaya)](https://docs.rs/anvaya)
+
+
 ECS [_like_](#limitations) dynamic storage in ~500 LOC.
 
 > 🚧 [WIP](#goals) [toy project](#motivations). Use at your own risk ⚠️
