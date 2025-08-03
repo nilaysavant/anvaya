@@ -28,7 +28,7 @@ slab = { workspace = true, optional = true }
 slab = { workspace = true }
 
 [[example]]
-name = "basic_slab"
+name = "basic"
 required-features = ["slab"]
 
 [[example]]
