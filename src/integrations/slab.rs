@@ -149,9 +149,10 @@ mod test {
         let mut results = query
             .with::<Abilities>() //
             .get::<Player>()
-            .unwrap();
+            .unwrap()
+            .map(|(_, player)| player.0);
         // Validate...
-        assert_eq!(results.next().unwrap().1.0, "Mike");
-        assert_eq!(results.next().unwrap().1.0, "Hannah");
+        assert_eq!(results.next().unwrap(), "Mike");
+        assert_eq!(results.next().unwrap(), "Hannah");
     }
 }
