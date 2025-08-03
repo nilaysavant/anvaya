@@ -33,5 +33,9 @@ name = "basic"
 required-features = ["slab"]
 
 [[example]]
+name = "sports"
+required-features = ["slab"]
+
+[[example]]
 name = "custom_storage"
 required-features = []
