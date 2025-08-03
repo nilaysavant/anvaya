@@ -130,6 +130,7 @@ mod test {
     fn readme_example() {
         // Create Components (of any type with no boilerplate)...
         struct Player(&'static str);
+        #[allow(dead_code)]
         struct Age(u8);
 
         // World and spawn...
