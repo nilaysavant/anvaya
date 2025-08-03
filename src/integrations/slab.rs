@@ -134,6 +134,7 @@ mod test {
             Shoot,
             Melee,
         }
+
         // World and spawn...
         let mut world = World::new();
         world
@@ -144,6 +145,7 @@ mod test {
             .spawn()
             .insert(Player("Hannah"))
             .insert(Abilities::Melee);
+
         // Query and filter...
         let mut query = world.query();
         let mut results = query
@@ -151,6 +153,7 @@ mod test {
             .get::<Player>()
             .unwrap()
             .map(|(_, player)| player.0);
+
         // Validate...
         assert_eq!(results.next().unwrap(), "Mike");
         assert_eq!(results.next().unwrap(), "Hannah");
