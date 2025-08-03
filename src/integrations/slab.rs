@@ -127,6 +127,30 @@ mod test {
     use super::*;
 
     #[test]
+    fn readme_example() {
+        // Create Components...
+        struct Player(&'static str);
+        struct Age(u8);
+
+        // World and spawn...
+        let mut world = World::new();
+        world.spawn().insert(Player("Mike")).insert(Age(30));
+        world.spawn().insert(Player("Hannah")).insert(Age(25));
+
+        // Query and filter...
+        let mut query = world.query();
+        let mut results = query
+            .with::<Age>()
+            .get::<Player>()
+            .unwrap()
+            .map(|(_, player)| player.0);
+
+        // Validate...
+        assert_eq!(results.next().unwrap(), "Mike");
+        assert_eq!(results.next().unwrap(), "Hannah");
+    }
+
+    #[test]
     fn basic() {
         // Create Components...
         struct Player(&'static str);
