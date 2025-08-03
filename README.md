@@ -26,7 +26,7 @@ world
 // Query and filter...
 let mut query = world.query();
 let mut results = query
-    .with::<Abilities>() //
+    .with::<Abilities>()
     .get::<Player>()
     .unwrap()
     .map(|(_, player)| player.0);
