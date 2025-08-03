@@ -128,7 +128,7 @@ mod test {
 
     #[test]
     fn readme_example() {
-        // Create Components...
+        // Create Components (of any type with no boilerplate)...
         struct Player(&'static str);
         struct Age(u8);
 
